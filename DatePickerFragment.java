@@ -4,6 +4,7 @@ import java.util.Calendar;
 
 import android.support.v4.app.DialogFragment;
 import android.app.DatePickerDialog;
+import android.app.DatePickerDialog.OnDateSetListener;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.os.Handler;
@@ -11,9 +12,12 @@ import android.os.Message;
 import android.view.View;
 import android.widget.DatePicker;
 
-public class DatePickerFragment extends DialogFragment  {
+public class DatePickerFragment extends DialogFragment  
+	implements OnDateSetListener{
 	Handler myHandler;
-	int myDay=15, myMonth=7, myYear=2013;
+	int myDay, myMonth, myYear;
+	String dateString="Date";
+	
 	
 	public DatePickerFragment() {
 	}
@@ -41,6 +45,8 @@ public class DatePickerFragment extends DialogFragment  {
 				Message message = new Message();
 				message.setData(b);
 				myHandler.sendMessage(message);
+				makeDateString();
+				
 			}
 			
 		};
@@ -48,7 +54,9 @@ public class DatePickerFragment extends DialogFragment  {
 	}
 	
 	public String getDateString() {
-		String dateString;
+		return dateString;
+	}
+	public void makeDateString() {
 		String monthString;
 		switch (myMonth) {
 		case 0:
@@ -93,7 +101,8 @@ public class DatePickerFragment extends DialogFragment  {
 		}
 		
 		dateString = monthString + " " + myDay + ", " + myYear;
-		return dateString;
+	}
+	public void onDateSet(DatePicker view, int year, int month, int day) {
 		
 	}
 }
