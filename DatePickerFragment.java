@@ -12,7 +12,7 @@ import android.os.Message;
 import android.view.View;
 import android.widget.DatePicker;
 
-public class DatePickerFragment extends DialogFragment  
+/*public class DatePickerFragment extends DialogFragment  
 	implements OnDateSetListener{
 	Handler myHandler;
 	int myDay, myMonth, myYear;
@@ -102,7 +102,5 @@ public class DatePickerFragment extends DialogFragment
 		
 		dateString = monthString + " " + myDay + ", " + myYear;
 	}
-	public void onDateSet(DatePicker view, int year, int month, int day) {
-		
-	}
-}
+
+}*/
