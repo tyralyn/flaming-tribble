@@ -3,6 +3,7 @@ package edu.ucsb.cs.cs185.tyralyn.tyralynScoring;
 import java.util.Calendar;
 
 
+
 //import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.app.FragmentManager;
@@ -37,10 +38,12 @@ public class MainActivity extends android.support.v4.app.FragmentActivity implem
 	String dateString = "blah";
 	int myDay, myMonth, myYear;
 	int myHour, myMinute;
+
+	
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
+				
 		dateButton = (Button) findViewById(R.id.date_button);
 		dateTextView= (TextView) findViewById(R.id.date_text);
 		gameButton = (Button) findViewById(R.id.game_button);
@@ -49,23 +52,6 @@ public class MainActivity extends android.support.v4.app.FragmentActivity implem
 		secondTeam= (TextView) findViewById(R.id.date_text);
 		secondTeamScore= (TextView) findViewById(R.id.date_text);
 		nextButton = (Button) findViewById(R.id.next_button);
-		String[] teams = {
-				"Hello, Android - Ed Burnette",
-				"Professional Android 2 App Dev - Reto Meier",
-				"Unlocking Android - Frank Ableson",
-				"Android App Development - Blake Meike",
-				"Pro Android 2 - Dave MacLean",
-				"Beginning Android 2 - Mark Murphy",
-				"Android Programming Tutorials - Mark Murphy",
-				"Android Wireless App Development - Lauren Darcey",
-				"Pro Android Games - Vladimir Silva",
-				};
-        ArrayAdapter<String> adapter = 
-                new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, teams);
-
-		AutoCompleteTextView a = (AutoCompleteTextView) findViewById(R.id.second_team_name);
-        a.setAdapter(adapter);
-        
 		
 		dateButton.setOnClickListener(this);
 		gameButton.setOnClickListener(this);
