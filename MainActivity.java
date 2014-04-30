@@ -3,14 +3,12 @@ package edu.ucsb.cs.cs185.tyralyn.tyralynScoring;
 import java.util.Calendar;
 
 
-
-
 //import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
+import android.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.app.DatePickerDialog;
-import android.app.Activity;
+import android.support.v4.app.DialogFragment;
 //import android.app.DatePickerDialog;
 //import android.app.Dialog;
 //import android.app.DialogFragment;
@@ -23,6 +21,8 @@ import android.os.Message;
 //import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 //import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -30,13 +30,13 @@ import android.widget.DatePicker;
 import android.widget.TextView;
 //import android.os.Build;
 
-public class MainActivity extends Activity implements OnClickListener {
+public class MainActivity extends android.support.v4.app.FragmentActivity implements OnClickListener {
 
 	Button dateButton, gameButton, nextButton;
-	TextView dateTextView; 
+	TextView dateTextView, firstTeam, firstTeamScore, secondTeam, secondTeamScore; 
 	String dateString = "blah";
 	int myDay, myMonth, myYear;
-
+	int myHour, myMinute;
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
@@ -44,9 +44,31 @@ public class MainActivity extends Activity implements OnClickListener {
 		dateButton = (Button) findViewById(R.id.date_button);
 		dateTextView= (TextView) findViewById(R.id.date_text);
 		gameButton = (Button) findViewById(R.id.game_button);
+		firstTeam= (TextView) findViewById(R.id.date_text);
+		firstTeamScore= (TextView) findViewById(R.id.date_text);
+		secondTeam= (TextView) findViewById(R.id.date_text);
+		secondTeamScore= (TextView) findViewById(R.id.date_text);
 		nextButton = (Button) findViewById(R.id.next_button);
+		String[] teams = {
+				"Hello, Android - Ed Burnette",
+				"Professional Android 2 App Dev - Reto Meier",
+				"Unlocking Android - Frank Ableson",
+				"Android App Development - Blake Meike",
+				"Pro Android 2 - Dave MacLean",
+				"Beginning Android 2 - Mark Murphy",
+				"Android Programming Tutorials - Mark Murphy",
+				"Android Wireless App Development - Lauren Darcey",
+				"Pro Android Games - Vladimir Silva",
+				};
+        ArrayAdapter<String> adapter = 
+                new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, teams);
+
+		AutoCompleteTextView a = (AutoCompleteTextView) findViewById(R.id.second_team_name);
+        a.setAdapter(adapter);
+        
 		
 		dateButton.setOnClickListener(this);
+		gameButton.setOnClickListener(this);
 	}
 	
 	public String makeDateString(DatePicker view, int year, int month, int day) {
@@ -116,6 +138,21 @@ public class MainActivity extends Activity implements OnClickListener {
 			}, myYear, myMonth, myDay);
 			myDPD.show();
 		}
+		
+		else if (v==gameButton) {
+			dateTextView.setText("jijijiji");
+			//FragmentManager fm = getSupportFragmentManager();
+			//enterTeamsFragment ETF = new enterTeamsFragment();
+			//ETF.show(this.getSupportFragmentManager(), "MyDialog");
+			showEnterTeamsFragment();
+
+		}
+	}
+	
+	private void showEnterTeamsFragment() {
+        FragmentManager fm = getFragmentManager();
+        enterTeamsFragment editNameDialog = new enterTeamsFragment();
+        editNameDialog.show(fm, "fragment_edit_name");
 	}
 }
  
