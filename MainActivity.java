@@ -4,8 +4,10 @@ import java.util.Calendar;
 
 
 
+
 //import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.app.Activity;
 import android.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.app.DatePickerDialog;
@@ -30,6 +32,7 @@ import android.widget.DatePicker;
 //import android.widget.DatePicker;
 import android.widget.TextView;
 //import android.os.Build;
+import edu.ucsb.cs.cs185.tyralyn.tyralynScoring.enterTeamsFragment;
 
 public class MainActivity extends android.support.v4.app.FragmentActivity implements OnClickListener {
 
@@ -47,10 +50,10 @@ public class MainActivity extends android.support.v4.app.FragmentActivity implem
 		dateButton = (Button) findViewById(R.id.date_button);
 		dateTextView= (TextView) findViewById(R.id.date_text);
 		gameButton = (Button) findViewById(R.id.game_button);
-		firstTeam= (TextView) findViewById(R.id.date_text);
-		firstTeamScore= (TextView) findViewById(R.id.date_text);
-		secondTeam= (TextView) findViewById(R.id.date_text);
-		secondTeamScore= (TextView) findViewById(R.id.date_text);
+		firstTeam= (TextView) findViewById(R.id.first_team);
+		firstTeamScore= (TextView) findViewById(R.id.first_team_score);
+		secondTeam= (TextView) findViewById(R.id.second_team);
+		secondTeamScore= (TextView) findViewById(R.id.second_team_score);
 		nextButton = (Button) findViewById(R.id.next_button);
 		
 		dateButton.setOnClickListener(this);
@@ -125,16 +128,20 @@ public class MainActivity extends android.support.v4.app.FragmentActivity implem
 			myDPD.show();
 		}
 		
-		else if (v==gameButton) {
-			dateTextView.setText("jijijiji");
-			//FragmentManager fm = getSupportFragmentManager();
-			//enterTeamsFragment ETF = new enterTeamsFragment();
-			//ETF.show(this.getSupportFragmentManager(), "MyDialog");
-			showEnterTeamsFragment();
+		if (v==gameButton) {
+	        FragmentManager fm = getFragmentManager();
+	        enterTeamsFragment etf = new enterTeamsFragment();
+	        etf.show(fm, "fragment_edit_name");
 
 		}
+		if (v==nextButton) {
+			firstTeam.setText("kkk");
+			firstTeamScore.setText(R.id.date_text);
+			secondTeam.setText(R.id.date_text);
+			secondTeamScore.setText(R.id.date_text);
+		}
 	}
-	
+
 	private void showEnterTeamsFragment() {
         FragmentManager fm = getFragmentManager();
         enterTeamsFragment editNameDialog = new enterTeamsFragment();

@@ -3,14 +3,14 @@ package edu.ucsb.cs.cs185.tyralyn.tyralynScoring;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
+import android.view.View.OnClickListener;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -19,6 +19,7 @@ public class enterTeamsFragment extends DialogFragment {
 	TextView firstTeamPrompt, firstScorePrompt, secondTeamPrompt, secondScorePrompt;
 	EditText firstScore, secondScore;
 	AutoCompleteTextView firstTeamName, secondTeamName;
+	Button doneButton;
 	
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -38,25 +39,31 @@ public class enterTeamsFragment extends DialogFragment {
         secondTeamName=(AutoCompleteTextView) view.findViewById(R.id.second_team_name);
         secondScorePrompt=(TextView) view.findViewById(R.id.second_team_score);
         secondScore=(EditText) view.findViewById(R.id.second_team_score_value);
+        doneButton = (Button) view.findViewById(R.id.done_button);
         firstTeamName.setThreshold(2);
         firstTeamName.setAdapter(adapter);
         secondTeamName.setThreshold(2);
         secondTeamName.setAdapter(adapter);
+        
+        doneButton.setOnClickListener(new OnClickListener() {
+        	public void onClick( View v) {
+        		team1=firstTeamName.getText().toString();
+        		team2=secondTeamName.getText().toString();
+        		score1=firstScore.getText().toString();
+        		score2=secondScore.getText().toString();
+        		
+        		dismiss();
+        		
+        	}
+        });
         getDialog().setTitle("Hello");
 
         return view;
     }
 	
-	/*@Override
+	@Override
 	public Dialog onCreateDialog(Bundle savedInstance) {
-		super.onCreate(savedInstance);
-		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-		builder.setMessage("coolmessage");
-		builder.setPositiveButton("Done", null);/*new DialogInterface.OnClickListener() {
-			public void onClick(DialogInterface dialog, int id) {
-			//set the strings to the attributes gotten in the edittext
-			}*/
-		//});
-		//return builder.create();
-	//}
+		Dialog dialog = super.onCreateDialog(savedInstance);
+		return dialog;
+	}
 }
